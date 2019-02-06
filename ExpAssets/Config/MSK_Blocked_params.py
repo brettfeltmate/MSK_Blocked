@@ -6,7 +6,7 @@
 collect_demographics = True
 manual_demographics_collection = False
 manual_trial_generation = False
-run_practice_blocks = True
+run_practice_blocks = False
 multi_user = True
 view_distance = 57 # in centimeters, 57cm = 1 deg of visual angle per cm of screen
 
@@ -19,8 +19,8 @@ eye_tracking = False
 #########################################
 # Environment Aesthetic Defaults
 #########################################
-default_fill_color = (45, 45, 45, 255)
-default_color = (255, 255, 255, 255)
+default_fill_color = (255, 255, 255, 255)
+default_color = (0, 0, 0, 255)
 default_font_size = 23
 default_font_unit = 'px'
 default_font_name = 'Hind-Medium'
@@ -39,8 +39,8 @@ saccadic_motion_threshold = 0.15
 # Experiment Structure
 #########################################
 multi_session_project = False
-trials_per_block = 20
-blocks_per_experiment = 15
+trials_per_block = 120
+blocks_per_experiment = 3
 table_defaults = {}
 conditions = []
 default_condition = None

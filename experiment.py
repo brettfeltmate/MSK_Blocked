@@ -4,13 +4,12 @@ __author__ = "Brett Feltmate"
 
 import klibs
 from klibs import P
-from klibs.KLConstants import STROKE_INNER, TK_S, NA, RC_COLORSELECT, RC_KEYPRESS
+from klibs.KLConstants import STROKE_INNER, TK_S, NA, RC_KEYPRESS
 from klibs.KLUtilities import *
 from klibs.KLKeyMap import KeyMap
 from klibs.KLUserInterface import any_key, ui_request
 from klibs.KLGraphics import fill, blit, flip, clear
 from klibs.KLGraphics.KLDraw import *
-from klibs.KLGraphics.colorspaces import const_lum as colors
 from klibs.KLResponseCollectors import ResponseCollector
 from klibs.KLEventInterface import TrialEventTicket as ET
 from klibs.KLCommunication import message
@@ -58,18 +57,16 @@ class MSK_Blocked(klibs.Experiment):
 			# 16.67ms | 83.33ms
 			HARD:[P.refresh_time, P.refresh_time * 5] }
 
-		self.block_conditions = [EASY, EASY, EASY, EASY, EASY,
-								 MEDIUM, MEDIUM, MEDIUM, MEDIUM, MEDIUM,
-								 HARD, HARD, HARD, HARD, HARD]
+		self.block_conditions = [EASY, MEDIUM, HARD]
 		random.shuffle(self.block_conditions)
 
 		# Stimulus sizes
 		fix_thickness = deg_to_px(0.1)
 		fix_size = deg_to_px(0.6)
-		target_size = deg_to_px(2)
+		target_size = deg_to_px(0.6)
 
 		# Init drawbjects
-		self.fixation = FixationCross(size=fix_size, thickness=fix_thickness, fill=WHITE)
+		self.fixation = FixationCross(size=fix_size, thickness=fix_thickness, fill=BLACK)
 
 		# Experiment messages
 		self.anykey_txt = "{0}\nPress any key to continue."
@@ -89,20 +86,13 @@ class MSK_Blocked(klibs.Experiment):
 			 sdl2.SDLK_u, sdl2.SDLK_v, sdl2.SDLK_w, sdl2.SDLK_x, sdl2.SDLK_y, sdl2.SDLK_z]
 		)
 
-		if P.run_practice_blocks:
-			self.insert_practice_block(1, trial_counts=30)
 
 	def block(self):
-		if P.practicing:
-			self.block_condition = EASY
-		else:
-			self.block_condition = self.block_conditions.pop()
+
+		self.block_condition = self.block_conditions.pop()
 
 		block_txt = "Block {0} of {1}".format(P.block_number, P.blocks_per_experiment)
 		progress_txt = self.anykey_txt.format(block_txt)
-
-		if P.practicing: 
-			progress_txt += "\n(This is a practice block)"
 
 		progress_msg = message(progress_txt, align='center', blit_txt=False)
 
@@ -203,7 +193,6 @@ class MSK_Blocked(klibs.Experiment):
 
 
 		return {
-			"practicing": str(P.practicing),
 			"block_num": P.block_number,
 			"trial_num": P.trial_number,
 			"isoa": self.isoa,
@@ -258,11 +247,11 @@ class MSK_Blocked(klibs.Experiment):
 
 	def generate_mask(self):
 		# Set mask size
-		canvas_size = deg_to_px(3)
+		canvas_size = deg_to_px(1)
 		# Set cell size
-		cell_size = canvas_size / 16 # Mask comprised of 254 smaller cells arranged 16x16
+		cell_size = canvas_size / 8 # Mask comprised of 64 smaller cells arranged 8x8
 		# Each cell has a black outline
-		cell_outline_width = deg_to_px(.05)
+		cell_outline_width = deg_to_px(.01)
 
 		# Initialize canvas to be painted w/ mask cells
 		canvas = Image.new('RGBA', [canvas_size, canvas_size], (0,0,0,0))
