@@ -88,10 +88,9 @@ class MSK_Blocked(klibs.Experiment):
 
 
 	def block(self):
-
 		self.block_condition = self.block_conditions.pop()
 
-		block_txt = "Block {0} of {1}".format(P.block_number, P.blocks_per_experiment)
+		block_txt = "Block {0} of {1}\nIn this block, T1 difficulty is {2}.".format(P.block_number, P.blocks_per_experiment, self.block_condition)
 		progress_txt = self.anykey_txt.format(block_txt)
 
 		progress_msg = message(progress_txt, align='center', blit_txt=False)
