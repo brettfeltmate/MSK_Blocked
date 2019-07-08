@@ -3,7 +3,7 @@
 
 An attentional blink paradigm which replicates Shore, McLaughlin, & Klein (2001; T1 difficulty is blocked across trials). 
 
-In the present case, T1 difficulty is blocked, switching for each of 6 blocks.
+In the present case, T1 difficulty is blocked, switching for each of 3 blocks (120 trials each).
 
 Designed to be component of a 3-part study, the other two being a direction replication of McLaughlin, Shore, & Klein (2001: T1 difficulty is varied trial-by-trial), and a 'combined' paradigm which varies T1 difficulty within & across blocks.
 
