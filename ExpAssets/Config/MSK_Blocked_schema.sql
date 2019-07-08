@@ -13,6 +13,7 @@ CREATE TABLE trials (
 	participant_id integer not null references participants(id),
 	block_num integer not null,
 	trial_num integer not null,
+	practicing text not null,
 	isoa text not null,
 	isi text not null,
 	ttoa text not null,
